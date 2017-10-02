@@ -25,6 +25,14 @@ type PostMetaData struct {
 	Created     time.Time
 }
 
+// Sort posts by time
+type ByTime []*Post
+
+// Sort interface needs Len, Less and Swap
+func (s ByTime) Len() int           { return len(s) }
+func (s ByTime) Less(i, j int) bool { return s[i].Created.Before(s[j].Created) }
+func (s ByTime) Swap(i, j int)      { s[i], s[j] = s[j], s[i] }
+
 // Used to generate static HTML
 type Post struct {
 	*PostMetaData
@@ -39,7 +47,7 @@ func generateSlug(filenm string) {
 }
 
 // Create a new post from file
-func newPost(fileinf os.FileInfo) (*Post, error) {
+func NewPost(fileinf os.FileInfo) (*Post, error) {
 	file, err := os.Open(filepath.Join(POSTS_DIR, fileinf.Name()))
 	if err != nil {
 		return nil, err
@@ -79,4 +87,18 @@ func newPost(fileinf os.FileInfo) (*Post, error) {
 		template.HTML(mdcontent),
 	}
 	return post, nil
+}
+
+// Go through posts dir and generate all post objects
+func GetPosts(fileinfs []os.FileInfo) []*Post {
+	posts = make([]*Post, 0, len(fileinfs))
+	for _, fi := range fileinfs {
+		post, err := NewPost(fi)
+		if err != nil {
+			log.Printf("[INFO] Post ignored: %s; error: %s\n", fi.Name(), err)
+		} else {
+			posts.append(posts, post)
+		}
+	}
+	return posts
 }
