@@ -1,0 +1,44 @@
+syntax = "proto3";
+package bloggo;
+
+import "google/protobuf/timestamp.proto";
+
+message CreatePostRequest {
+
+}
+
+message CreatePostResponse {
+
+}
+
+message FetchPostRequest {
+
+}
+
+message FetchPostResponse {
+
+}
+
+message UpdatePostRequest {
+
+}
+
+message UpdatePostResponse {
+
+}
+
+message DeletePostRequest {
+
+}
+
+message DeletePostResponse {
+
+}
+
+// Bloggo is a service that defines the interface to interact with the blog engine
+service Bloggo {
+    rpc CreatePost(CreatePostRequest) returns (CreatePostResponse);
+    rpc FetchPost(FetchPostRequest) returns (FetchPostResponse);
+    rpc UpdatePost(UpdatePostRequest) returns (UpdatePostResponse);
+    rpc DeletePost(DeletePostRequest) returns (DeletePostResponse);
+}

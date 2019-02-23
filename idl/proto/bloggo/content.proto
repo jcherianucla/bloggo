@@ -1,0 +1,28 @@
+syntax = "proto3";
+package bloggo;
+
+import "google/protobuf/timestamp.proto";
+import "../user/user.proto";
+
+// Tag defines a keyword to identify an object by
+message Tag {
+    // UUID is the unique identifier for a tag object
+    int64 uuid = 1;
+    // Name defines the name of the tag
+    string name = 2;
+}
+// Post defines the interface for a blog post
+message Post {
+    // UUID is the unique identifier for a post object
+    int64 uuid = 1;
+    // Title defines the title of the post
+    string title = 2;
+    // Md_Content holds the markdown to HTML content
+    bytes md_content = 3;
+    // Tags is a list of tags that belong to a post
+    repeated Tag tags = 5;
+    // Created_at is the time the post object was created
+    google.protobuf.Timestamp created_at = 6;
+    // Updated_at is the latest time the post object was updated
+    google.protobuf.Timestamp updated_at = 7;
+}
