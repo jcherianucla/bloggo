@@ -2,7 +2,6 @@ syntax = "proto3";
 package bloggo;
 
 import "google/protobuf/timestamp.proto";
-import "../user/user.proto";
 
 // Tag defines a keyword to identify an object by
 message Tag {

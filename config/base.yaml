@@ -1,0 +1,4 @@
+service: bloggo
+
+grpc:
+  hostPort: "localhost:7777"
