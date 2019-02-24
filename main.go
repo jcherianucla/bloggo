@@ -1,21 +1,18 @@
 package main
 
 import (
-	"log"
-	"os"
-	"path/filepath"
+	"github.com/jcherianucla/bloggo/clients"
+	"github.com/jcherianucla/bloggo/config"
+	"go.uber.org/fx"
 )
 
-var (
-	PostsDir     string
-	TemplatesDir string
-)
+func main() {
+	fx.New(fxOptions()...).Run()
+}
 
-func init() {
-	wd, err := os.Getwd()
-	if err != nil {
-		log.Fatal("[ERROR]", err)
+func fxOptions() []fx.Option {
+	return []fx.Option{
+		config.Module,
+		clients.Module,
 	}
-	PostsDir = filepath.Join(wd, "posts")
-	TemplatesDir = filepath.Join(wd, "templates")
 }
