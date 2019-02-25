@@ -2,21 +2,22 @@ syntax = "proto3";
 package proto;
 
 import "google/protobuf/timestamp.proto";
+import "idl/proto/content.proto";
 
 message CreatePostRequest {
-
+   Post post = 1;
 }
 
 message CreatePostResponse {
-
+    int64 post_uuid = 1;
 }
 
 message FetchPostRequest {
-
+    int64 post_uuid = 1;
 }
 
 message FetchPostResponse {
-
+    Post post = 1;
 }
 
 message UpdatePostRequest {
@@ -28,11 +29,11 @@ message UpdatePostResponse {
 }
 
 message DeletePostRequest {
-
+    int64 post_uuid = 1;
 }
 
 message DeletePostResponse {
-
+    bool did_delete = 1;
 }
 
 // Bloggo is a service that defines the interface to interact with the blog engine
