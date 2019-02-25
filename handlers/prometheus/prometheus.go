@@ -1,4 +1,4 @@
-package handlers
+package prometheus
 
 import (
 	"net/http"
@@ -14,17 +14,22 @@ const (
 	_metricsEndpoint = "/metrics"
 )
 
-var PrometheusModule = fx.Provide(NewPrometheus)
+var Module = fx.Provide(New)
 
 type Params struct {
 	fx.In
 	config.AppConfig
 }
 
-func NewPrometheus(p Params) {
+type Result struct {
+	fx.Out
+}
+
+func New(p Params) Result {
 	http.Handle(_metricsEndpoint, promhttp.Handler())
 	err := http.ListenAndServe(p.Config().MetricsConfig.Port, nil)
 	if err != nil {
 		utils.HandleErr(err)
 	}
+	return Result{}
 }
