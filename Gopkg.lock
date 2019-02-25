@@ -2,18 +2,133 @@
 
 
 [[projects]]
-  digest = "1:4c0989ca0bcd10799064318923b9bc2db6b4d6338dd75f3f2d86c3511aaaf5cf"
+  branch = "master"
+  digest = "1:d6afaeed1502aa28e80a4ed0981d570ad91b2579193404256ce672ed0a609e0d"
+  name = "github.com/beorn7/perks"
+  packages = ["quantile"]
+  pruneopts = "UT"
+  revision = "3a771d992973f24aa725d07868b467d1ddfceafb"
+
+[[projects]]
+  digest = "1:bdb51995a2e3abcf3b972b3b8ede0f0d330c66a2ef3e56d59650005c6058655c"
+  name = "github.com/go-pg/pg"
+  packages = [
+    ".",
+    "internal",
+    "internal/iszero",
+    "internal/parser",
+    "internal/pool",
+    "internal/struct_filter",
+    "internal/tag",
+    "orm",
+    "types",
+  ]
+  pruneopts = "UT"
+  revision = "25a462619f42c01a451397a528366002ead82898"
+  version = "v8.0.1"
+
+[[projects]]
+  branch = "master"
+  digest = "1:2356bcf5096ecb76bfcce7cb96af2d58c68ac63206c22d4d2aff9b9df70a486e"
   name = "github.com/golang/protobuf"
   packages = [
+    "jsonpb",
     "proto",
     "ptypes",
     "ptypes/any",
     "ptypes/duration",
+    "ptypes/struct",
     "ptypes/timestamp",
   ]
   pruneopts = "UT"
-  revision = "aa810b61a9c79d51363740d207bb46cf8e620ed5"
+  revision = "c823c79ea1570fb5ff454033735a8e68575d1d0f"
+
+[[projects]]
+  branch = "master"
+  digest = "1:198250813293ae60ead65c830485f2003c0550ae6046185a557a02b0122a784c"
+  name = "github.com/grpc-ecosystem/go-grpc-middleware"
+  packages = [
+    ".",
+    "logging",
+    "logging/zap",
+    "logging/zap/ctxzap",
+    "recovery",
+    "tags",
+    "tags/zap",
+  ]
+  pruneopts = "UT"
+  revision = "cfaf5686ec79ff8344257723b6f5ba1ae0ffeb4d"
+
+[[projects]]
+  digest = "1:9b7a07ac7577787a8ecc1334cb9f34df1c76ed82a917d556c5713d3ab84fbc43"
+  name = "github.com/grpc-ecosystem/go-grpc-prometheus"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "c225b8c3b01faf2899099b768856a9e916e5087b"
   version = "v1.2.0"
+
+[[projects]]
+  branch = "master"
+  digest = "1:fd97437fbb6b7dce04132cf06775bd258cce305c44add58eb55ca86c6c325160"
+  name = "github.com/jinzhu/inflection"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "04140366298a54a039076d798123ffa108fff46c"
+
+[[projects]]
+  digest = "1:ff5ebae34cfbf047d505ee150de27e60570e8c394b3b8fdbb720ff6ac71985fc"
+  name = "github.com/matttproud/golang_protobuf_extensions"
+  packages = ["pbutil"]
+  pruneopts = "UT"
+  revision = "c12348ce28de40eed0136aa2b644d0ee0650e56c"
+  version = "v1.0.1"
+
+[[projects]]
+  digest = "1:ef03fb1dae4d010196652653f00a8002e94c19bcabdc8ca5100a804ffef63a47"
+  name = "github.com/prometheus/client_golang"
+  packages = [
+    "prometheus",
+    "prometheus/internal",
+    "prometheus/promauto",
+    "prometheus/promhttp",
+  ]
+  pruneopts = "UT"
+  revision = "505eaef017263e299324067d40ca2c48f6a2cf50"
+  version = "v0.9.2"
+
+[[projects]]
+  branch = "master"
+  digest = "1:2d5cd61daa5565187e1d96bae64dbbc6080dacf741448e9629c64fd93203b0d4"
+  name = "github.com/prometheus/client_model"
+  packages = ["go"]
+  pruneopts = "UT"
+  revision = "fd36f4220a901265f90734c3183c5f0c91daa0b8"
+
+[[projects]]
+  digest = "1:35cf6bdf68db765988baa9c4f10cc5d7dda1126a54bd62e252dbcd0b1fc8da90"
+  name = "github.com/prometheus/common"
+  packages = [
+    "expfmt",
+    "internal/bitbucket.org/ww/goautoneg",
+    "model",
+  ]
+  pruneopts = "UT"
+  revision = "cfeb6f9992ffa54aaa4f2170ade4067ee478b250"
+  version = "v0.2.0"
+
+[[projects]]
+  branch = "master"
+  digest = "1:ca30ee2c96d195cef49b546d10825d3e13b50c63da4df23c80e77c51e07bad0d"
+  name = "github.com/prometheus/procfs"
+  packages = [
+    ".",
+    "internal/util",
+    "iostats",
+    "nfs",
+    "xfs",
+  ]
+  pruneopts = "UT"
+  revision = "e4d4a2206da023361ed100d85c5f2cf9c8364e9f"
 
 [[projects]]
   digest = "1:ff6b126259880858441d0a43e63c3f2f9071601415e1f34a7f053f90cbef8464"
@@ -57,10 +172,34 @@
   version = "v1.1.0"
 
 [[projects]]
+  digest = "1:c52caf7bd44f92e54627a31b85baf06a68333a196b3d8d241480a774733dcf8b"
+  name = "go.uber.org/zap"
+  packages = [
+    ".",
+    "buffer",
+    "internal/bufferpool",
+    "internal/color",
+    "internal/exit",
+    "zapcore",
+  ]
+  pruneopts = "UT"
+  revision = "ff33455a0e382e8a81d14dd7c922020b6b5e7982"
+  version = "v1.9.1"
+
+[[projects]]
   branch = "master"
-  digest = "1:cd17bc5dbd6ff6bd147dcd4712d423c1808f529c77c879c34df6b20b7501562b"
+  digest = "1:f92f6956e4059f6a3efc14924d2dd58ba90da25cc57fe07ae3779ef2f5e0c5f2"
+  name = "golang.org/x/crypto"
+  packages = ["pbkdf2"]
+  pruneopts = "UT"
+  revision = "ffb98f73852f696ea2bb21a617a5c4b3e067a439"
+
+[[projects]]
+  branch = "master"
+  digest = "1:fc7b6b4384e1e849d99eab58eca4f8c0a76bad4699117d5077a9a5c3c83e289e"
   name = "golang.org/x/net"
   packages = [
+    "context",
     "http/httpguts",
     "http2",
     "http2/hpack",
@@ -158,14 +297,33 @@
   revision = "51d6538a90f86fe93ac480b35f37b2be17fef232"
   version = "v2.2.2"
 
+[[projects]]
+  digest = "1:999d566ad1ae4303c456af5a155f7b42401cca4fd33552567ed9dd997b107a08"
+  name = "mellium.im/sasl"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "e58e780e1378aa4df5dc705364ff5ae9a4dd1e04"
+  version = "v0.2.1"
+
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
+    "github.com/go-pg/pg",
     "github.com/golang/protobuf/proto",
     "github.com/golang/protobuf/ptypes/timestamp",
+    "github.com/grpc-ecosystem/go-grpc-middleware",
+    "github.com/grpc-ecosystem/go-grpc-middleware/logging/zap",
+    "github.com/grpc-ecosystem/go-grpc-middleware/recovery",
+    "github.com/grpc-ecosystem/go-grpc-prometheus",
+    "github.com/prometheus/client_golang/prometheus",
+    "github.com/prometheus/client_golang/prometheus/promauto",
+    "github.com/prometheus/client_golang/prometheus/promhttp",
     "go.uber.org/fx",
+    "go.uber.org/zap",
     "google.golang.org/grpc",
+    "google.golang.org/grpc/codes",
+    "google.golang.org/grpc/status",
     "gopkg.in/yaml.v2",
   ]
   solver-name = "gps-cdcl"
