@@ -2,3 +2,15 @@ service: bloggo
 
 grpc:
   hostPort: "localhost:7777"
+
+logger:
+  style: "sugar"
+
+metrics:
+  port: "9090"
+
+datastore:
+  user: "jahan"
+  password: "helloworld"
+  name: "bloggo"
+  hostPort: "localhost:2020"
