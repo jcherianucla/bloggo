@@ -2,11 +2,9 @@ package handlers
 
 import (
 	"context"
-	"net"
-
-	"go.uber.org/zap"
-
-	"github.com/grpc-ecosystem/go-grpc-prometheus"
+	"github.com/jcherianucla/bloggo/idl/proto"
+	"github.com/jcherianucla/bloggo/idl/proto/data"
+	"github.com/jcherianucla/bloggo/idl/proto/models"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -19,8 +17,6 @@ import (
 	"github.com/jcherianucla/bloggo/config"
 
 	"go.uber.org/fx"
-
-	"github.com/jcherianucla/bloggo/.gen/idl/proto"
 )
 
 var Module = fx.Provide(New)
@@ -39,56 +35,44 @@ type Params struct {
 type bloggoHandler struct {
 }
 
-func New(p Params) {
-	lis, err := net.Listen("tcp", p.Config().GRPCConfig.HostPort)
+type Result struct {
+	fx.Out
+
+	Server *grpc.Server
+}
+
+func New(p Params) Result {
 	logger := p.Logger("debug")
-	if err != nil {
-		logger.Fatal("Failed to retrieve server port", zap.Error(err))
-	}
 	//TODO: Add TLS and auth interceptor
 	gs := grpc.NewServer(
 		grpc.StreamInterceptor(grpc_middleware.ChainStreamServer(
 			grpc_zap.StreamServerInterceptor(logger),
-			grpc_prometheus.StreamServerInterceptor,
 			grpc_recovery.StreamServerInterceptor(
 				grpc_recovery.WithRecoveryHandler(panicHandler)),
 		)),
 		grpc.UnaryInterceptor(grpc_middleware.ChainUnaryServer(
 			grpc_zap.UnaryServerInterceptor(logger),
-			grpc_prometheus.UnaryServerInterceptor,
 			grpc_recovery.UnaryServerInterceptor(
 				grpc_recovery.WithRecoveryHandler(panicHandler)),
 		)))
-	grpc_prometheus.Register(gs)
 	proto.RegisterBloggoServer(gs, bloggoHandler{})
-	go func() {
-		if err = gs.Serve(lis); err != nil {
-			logger.Fatal("Failed to serve", zap.Error(err))
-		}
-	}()
+
+	return Result{Server: gs}
 }
 
-func (bh bloggoHandler) CreatePost(
+func (bh bloggoHandler) Create(
 	ctx context.Context,
 	in *proto.CreatePostRequest,
 ) (*proto.CreatePostResponse, error) {
-	return nil, nil
-}
-func (bh bloggoHandler) FetchPost(
-	ctx context.Context,
-	in *proto.FetchPostRequest,
-) (*proto.FetchPostResponse, error) {
-	return nil, nil
-}
-func (bh bloggoHandler) UpdatePost(
-	ctx context.Context,
-	in *proto.UpdatePostRequest,
-) (*proto.UpdatePostResponse, error) {
-	return nil, nil
-}
-func (bh bloggoHandler) DeletePost(
-	ctx context.Context,
-	in *proto.DeletePostRequest,
-) (*proto.DeletePostResponse, error) {
-	return nil, nil
+	return &proto.CreatePostResponse{
+		Data: &models.Post{
+			ProtoUuid: &data.PostId{
+				Uuid: &data.UUID{
+					Value: "hello",
+				},
+			},
+			Title:       "Hello World",
+			Description: "This is the first static response from this gRPC service",
+		},
+	}, nil
 }

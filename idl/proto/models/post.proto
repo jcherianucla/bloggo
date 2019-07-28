@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+option go_package = "github.com/jcherianucla/bloggo/idl/proto/models";
+
+package models;
+
+import "data/ids.proto";
+
+message Post {
+	data.PostId proto_uuid = 1;
+	string title = 2;
+	string description = 3;
+}
