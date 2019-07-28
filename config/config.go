@@ -2,13 +2,14 @@ package config
 
 import (
 	"io/ioutil"
+	"os"
 
 	"go.uber.org/fx"
 	"gopkg.in/yaml.v2"
 )
 
 const (
-	_base = "base.yaml"
+	_base = "/config/base.yaml"
 )
 
 // Module provides the Config through Fx
@@ -77,7 +78,8 @@ type DBConfig struct {
 // corresponding configuration objects through their tags
 func New(p Params) (Result, error) {
 	cfg := &Config{}
-	yamlFile, err := ioutil.ReadFile(_base)
+	pwd, _ := os.Getwd()
+	yamlFile, err := ioutil.ReadFile(pwd + _base)
 	if err != nil {
 		return Result{}, err
 	}
