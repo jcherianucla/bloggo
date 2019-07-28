@@ -1,5 +1,6 @@
 PROTOC_GEN_GO := $(GOPATH)/bin/protoc-gen-go
 PROTOC := $(shell which protoc)
+# A
 # If protoc isn't on the path, set it to a target that's never up to date, so
 # the install command always runs.
 ifeq ($(PROTOC),)
@@ -23,15 +24,26 @@ endif
 $(PROTOC_GEN_GO):
 	go get -u github.com/golang/protobuf/protoc-gen-go
 
+OUTPUT_PATH := $(GOPATH)/src
 IDL_DIR := idl/proto/
-GEN_DIR := .gen/
+DATA_IDL_DIR := $(IDL_DIR)data/
+MODELS_IDL_DIR := $(IDL_DIR)models/
+PROTOS := $(DATA_IDL_DIR) $(MODELS_IDL_DIR) $(IDL_DIR)
 
 .PHONY: proto build test clean
+
+# Run the proto compiler on input
+define compile_proto
+	protoc -I. --proto_path=$(IDL_DIR) \
+		--go_out=plugins=grpc:$(OUTPUT_PATH) $(1)*.proto
+endef
+
 # Generate the proto objects using the protoc-gen-go compiler
-proto: $(PROTOC_GEN_GO) $(PROTOC) clean
-	mkdir -p $(GEN_DIR)
-	protoc -I/usr/local/include -I. -I$(GOPATH)/src \
-			--go_out=plugins=grpc:$(GEN_DIR) $(IDL_DIR)*.proto
+proto: $(PROTOC_GEN_GO) $(PROTOC)
+	# TODO: Figure out how to successfully do this as a for loop
+	$(call compile_proto,$(DATA_IDL_DIR))
+	$(call compile_proto,$(MODELS_IDL_DIR))
+	$(call compile_proto,$(IDL_DIR))
 
 # Location of prometheus monitoring configuration
 PROMETHEUS_CFG := "config/prometheus.yml"
