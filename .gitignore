@@ -1,5 +1,4 @@
 .idea
 .gen
-data
 vendor
 *.pb.go

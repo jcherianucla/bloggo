@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option go_package = "github.com/jcherianucla/bloggo/idl/proto/data";
+
+package data;
+
+message UUID {
+	string value = 1;
+}
+
+message PostId {
+	UUID uuid = 1;
+}
+
+message TagId {
+	UUID uuid = 1;
+}
