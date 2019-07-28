@@ -2,3 +2,4 @@
 .gen
 data
 vendor
+*.pb.go
