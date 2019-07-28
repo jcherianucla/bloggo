@@ -46,7 +46,9 @@ type Metrics interface {
 // New creates a new instrumenter
 func New(p Params) Result {
 	return Result{
-		Instrument: &instrument{},
+		Instrument: &instrument{
+			loggers: make(map[string]*zap.Logger),
+		},
 	}
 }
 
